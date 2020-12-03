@@ -1,0 +1,127 @@
+<html>
+    <head>
+		<!-- 
+			v1.1
+				가디언 포인트 티켓 추가로 업데이트
+			v1.0
+				가디언 신본부 추가로 계산기 제작
+		-->
+        <title>
+            가디언 신본부 계산기
+		</title>
+
+        <link href="Guardian Tales.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <script language = "javascript">
+
+            function digit_check(evt){
+                var code = evt.which?evt.which:event.keyCode;
+                if((48 <= code && code <= 57) || (code == 8) || (96 <= code && code <= 105)){
+					//fine
+                }
+				else{
+					return false;
+				}
+            }
+
+			function compute(){
+
+				n = parseInt(document.getElementById("nowlvl").value);
+				nowpoint = parseInt(document.getElementById("nowpoint").value);
+				hourpoint = parseInt(document.getElementById("hourpoint").value);
+				k = parseInt(document.getElementById("goallevel").value);
+				var goalpoint = 700 * ( (n + k - 1) * (k - n) / 2) - nowpoint;
+				var goalhour = (700 * ( (n + k - 1) * (k - n) / 2) - nowpoint) / hourpoint;
+				var goalday = parseInt(goalhour / 24).toString();
+				var remainderhour = Math.ceil((goalhour % 24)).toString();
+				c1 = parseInt(document.getElementById("coopon1").value);
+				c2 = parseInt(document.getElementById("coopon2").value);
+				c3 = parseInt(document.getElementById("coopon3").value);
+				c4 = parseInt(document.getElementById("coopon4").value);
+				var cooponhour = 2 * c1 + 6 * c2 + 12 * c3 + 24 * c4;
+				var cooponday = parseInt(cooponhour / 24).toString();
+				var cooponremainderhour = Math.ceil((cooponhour % 24)).toString();
+				var cooponpoint = hourpoint * cooponhour;
+				var tothour = goalhour - cooponhour;
+				var	totday = parseInt(tothour / 24).toString();
+				var totremainerhour = Math.ceil((tothour % 24)).toString();
+
+				if(isNaN(goalhour) || isNaN(goalday)|| isNaN(remainderhour) || goalhour <= 0)
+					document.getElementById("Goalday").innerHTML  = "";
+				else
+					document.getElementById("Goalday").innerHTML  = "필요한 포인트<br>" + (goalpoint) + "포인트<br><hr>"+ "필요한 시간<br>" + (goalday) + "일 " + (remainderhour) + "시간<br><hr>" + "쿠폰 사용후 필요한 시간<br>" + (totday) + "일 " + (totremainerhour) + "시간";
+
+
+				if(isNaN(cooponhour) || isNaN(cooponday)|| isNaN(cooponremainderhour) || cooponhour <= 0)
+					document.getElementById("Cooponday").innerHTML  = "";
+				else
+					document.getElementById("Cooponday").innerHTML  = "쿠폰사용시 회득 포인트<br>" + (cooponpoint) + "포인트<br><hr>"+ "쿠폰으로 단축되는 시간<br>" + (cooponday) + "일 " + (cooponremainderhour) + "시간";
+			
+			}
+
+
+
+		</script>
+		<table style="margin: auto;" border="0px">
+			<tr style="vertical-align: top;">
+				<td>
+					<div>
+						<form>
+							<p>현재 가디언 레벨</p>
+							<input id="nowlvl" type="number" onkeydown ="return digit_check(event)" onkeyup="compute()" onfocus="this.select()">
+							<hr>
+							<p>현재 모인 포인트</p>
+							<input id="nowpoint" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value="0" onfocus="this.select()">
+							<hr>
+							<p>시간당 파티 총 생산량</p>
+							<input id="hourpoint" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" onfocus="this.select()">
+							<hr>
+							<p>목표 가디언 레벨</p>
+							<input id="goallevel" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" onfocus="this.select()">
+							<hr>
+							
+							<button class="button button5" type="reset">초기화</button>
+							<button class="button button5" type="button" onClick = "compute()">계산</button>
+						</form>
+					</div>
+					<br>
+					<div>
+						<p id="Goalday" style="text-indent: 0; margin: 10px;"></p>
+					</div>
+				</td>
+				<td>
+					<div>
+						<form>
+							<p>[2시간] 가디언 포인트 티켓</p>
+							<input id="coopon1" type="number" onkeydown ="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
+							<hr>
+							<p>[6시간] 가디언 포인트 티켓</p>
+							<input id="coopon2" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()"> 
+							<hr>
+							<p>[12시간] 가디언 포인트 티켓</p>
+							<input id="coopon3" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
+							<hr>
+							<p>[24시간] 가디언 포인트 티켓</p>
+							<input id="coopon4" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
+							<hr>
+							
+							<button class="button button5" type="reset">초기화</button>
+							<button class="button button5" type="button" onClick = "compute()">계산</button>
+						</form>
+					</div>
+					<br>
+					<div>
+						<p id="Cooponday" style="text-indent: 0; margin: 10px;"></p>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+
+        
+
+
+
+    </body>
+</html>
