@@ -1,0 +1,116 @@
+
+body{
+  background-color: #f2f2f2; padding: 20px;
+  text-indent: 1em;
+}
+p{
+    font-size: 15px;
+}
+
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  outline: 0;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.button4 {
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+}
+
+.button4:hover {background-color: #e7e7e7;}
+
+
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
+
+/*
+
+<button class="button button1">Green</button>
+<button class="button button2">Blue</button>
+<button class="button button3">Red</button>
+<button class="button button4">Gray</button>
+<button class="button button5">Black</button>
+*/
+
+
+input[type=number], select {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 15px;
+  display: inline-block;
+  border: 1px solid #949494;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 5px rgb(209, 209, 209) inset;
+  outline: 0;
+}
+
+div {
+  background-color: #ffffff;
+  padding: 15px 20px 0px 20px;
+  border-radius: 4px;
+  border: 1px solid #c5c5c5;
+  box-shadow: 0px 0px 3px rgb(190, 190, 190);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+  
