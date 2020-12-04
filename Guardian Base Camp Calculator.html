@@ -1,6 +1,8 @@
 <html>
     <head>
 		<!-- 
+			v1.1.1
+				쿠폰 -> 티켓으로 수정
 			v1.1
 				가디언 포인트 티켓 계산기 추가
 			v1.0
@@ -35,34 +37,28 @@
 				var goalhour = (700 * ( (n + k - 1) * (k - n) / 2) - nowpoint) / hourpoint;
 				var goalday = parseInt(goalhour / 24).toString();
 				var remainderhour = Math.ceil((goalhour % 24)).toString();
-				c1 = parseInt(document.getElementById("coopon1").value);
-				c2 = parseInt(document.getElementById("coopon2").value);
-				c3 = parseInt(document.getElementById("coopon3").value);
-				c4 = parseInt(document.getElementById("coopon4").value);
-				var cooponhour = 2 * c1 + 6 * c2 + 12 * c3 + 24 * c4;
-				var cooponday = parseInt(cooponhour / 24).toString();
-				var cooponremainderhour = Math.ceil((cooponhour % 24)).toString();
-				var cooponpoint = hourpoint * cooponhour;
-				var tothour = goalhour - cooponhour;
+				c1 = parseInt(document.getElementById("ticket1").value);
+				c2 = parseInt(document.getElementById("ticket2").value);
+				c3 = parseInt(document.getElementById("ticket3").value);
+				c4 = parseInt(document.getElementById("ticket4").value);
+				var tickethour = 2 * c1 + 6 * c2 + 12 * c3 + 24 * c4;
+				var ticketday = parseInt(tickethour / 24).toString();
+				var ticketremainderhour = Math.ceil((tickethour % 24)).toString();
+				var ticketpoint = hourpoint * tickethour;
+				var tothour = goalhour - tickethour;
 				var	totday = parseInt(tothour / 24).toString();
 				var totremainerhour = Math.ceil((tothour % 24)).toString();
-
 				if(isNaN(goalhour) || isNaN(goalday)|| isNaN(remainderhour) || goalhour <= 0)
 					document.getElementById("Goalday").innerHTML  = "";
 				else
-					document.getElementById("Goalday").innerHTML  = "필요한 포인트<br>" + (goalpoint) + "포인트<br><hr>"+ "필요한 시간<br>" + (goalday) + "일 " + (remainderhour) + "시간<br><hr>" + "쿠폰 사용후 필요한 시간<br>" + (totday) + "일 " + (totremainerhour) + "시간";
-
-
-				if(isNaN(cooponhour) || isNaN(cooponday)|| isNaN(cooponremainderhour) || cooponhour <= 0)
-					document.getElementById("Cooponday").innerHTML  = "";
+					document.getElementById("Goalday").innerHTML  = "필요한 포인트<br>" + (goalpoint) + "포인트<br><hr>"+ "필요한 시간<br>" + (goalday) + "일 " + (remainderhour) + "시간<br><hr>" + "티켓 사용후 필요한 시간<br>" + (totday) + "일 " + (totremainerhour) + "시간";
+				if(isNaN(tickethour) || isNaN(ticketday)|| isNaN(ticketremainderhour) || tickethour <= 0)
+					document.getElementById("ticketday").innerHTML  = "";
 				else
-					document.getElementById("Cooponday").innerHTML  = "쿠폰사용시 회득 포인트<br>" + (cooponpoint) + "포인트<br><hr>"+ "쿠폰으로 단축되는 시간<br>" + (cooponday) + "일 " + (cooponremainderhour) + "시간";
-			
+					document.getElementById("ticketday").innerHTML  = "티켓사용시 회득 포인트<br>" + (ticketpoint) + "포인트<br><hr>"+ "티켓으로 단축되는 시간<br>" + (ticketday) + "일 " + (ticketremainderhour) + "시간";
 			}
-
-
-
 		</script>
+
 		<table style="margin: auto;" border="0px">
 			<tr style="vertical-align: top;">
 				<td>
@@ -94,16 +90,16 @@
 					<div>
 						<form>
 							<p>[2시간] 가디언 포인트 티켓</p>
-							<input id="coopon1" type="number" onkeydown ="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
+							<input id="ticket1" type="number" onkeydown ="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
 							<hr>
 							<p>[6시간] 가디언 포인트 티켓</p>
-							<input id="coopon2" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()"> 
+							<input id="ticket2" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()"> 
 							<hr>
 							<p>[12시간] 가디언 포인트 티켓</p>
-							<input id="coopon3" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
+							<input id="ticket3" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
 							<hr>
 							<p>[24시간] 가디언 포인트 티켓</p>
-							<input id="coopon4" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
+							<input id="ticket4" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
 							<hr>
 							
 							<button class="button button5" type="reset">초기화</button>
@@ -112,16 +108,10 @@
 					</div>
 					<br>
 					<div>
-						<p id="Cooponday" style="text-indent: 0; margin: 10px;"></p>
+						<p id="ticketday" style="text-indent: 0; margin: 10px;"></p>
 					</div>
 				</td>
 			</tr>
 		</table>
-
-
-        
-
-
-
     </body>
 </html>
