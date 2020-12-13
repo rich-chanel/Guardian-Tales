@@ -1,6 +1,9 @@
 <html>
     <head>
 		<!-- 
+			v1.1.3
+				목표레벨이 101 이상일경우 레벨업시 필요한 경험치 량이 달라진것 적용
+				초기
 			v1.1.2
 				목표레벨이 101 이상일경우 레벨업시 필요한 경험치 량이 달라져 계산값과 다르다는 알림 출력
 			v1.1.1
@@ -29,20 +32,55 @@
 				}
             }
 
-			function compute(){
+			//i 레벨에서 i+1 레벨로 레벨업시 필요 포인트 = lvlup_point[i]
+			//lvlup_point[1] = 700, lvlup_point[2] = 1400, ...
+			var lvlup_point = [];
+			var rep = [];
+			for (i=0; i < 8; i++){		
+				rep[i] = 100 + 25 * i;
+			}
+			//먼저 lvlup_point를 700인 등차수열로 제작
+			for (i = 0; i < 301; i++){
+				lvlup_point[i] = 700 * i;
+			}
+			//rep[j] 레벨을 초과할때마다 lvlup_point[i]에 175 를(i-99)(j+1)번 더하기 
+			//101, 126, 151, ... 레벨업 할때마다 필요 경험차량이 875, 1050, 1225, ... 로달라지는거 계산하기 위함
+			for (j = 0; j < 8; j++){
+				for(i = 99; i < 301; i++){
+					if (i > rep[j]){
+							lvlup_point[i] += 175 * (i - rep[j]);
+						}
+				}
+			}
 
-				n = parseInt(document.getElementById("nowlvl").value);
-				nowpoint = parseInt(document.getElementById("nowpoint").value);
-				hourpoint = parseInt(document.getElementById("hourpoint").value);
-				k = parseInt(document.getElementById("goallevel").value);
-				var goalpoint = 700 * ( (n + k - 1) * (k - n) / 2) - nowpoint;
-				var goalhour = (700 * ( (n + k - 1) * (k - n) / 2) - nowpoint) / hourpoint;
+			console.log('lvlup_point', lvlup_point);
+
+			//레벨업 필요 포인트 차
+			// var lvlup_inc = [];
+			// for (i = 1; i < 301; i++){
+			// 	lvlup_inc[i] = lvlup_point[i] - lvlup_point[i-1];
+			// }
+			// console.log('lvlup_inc', lvlup_inc);
+
+			function compute(){
+				var k = parseInt(document.getElementById("nowlvl").value);
+				var nowpoint = parseInt(document.getElementById("nowpoint").value);
+				var hourpoint = parseInt(document.getElementById("hourpoint").value);
+				var n = parseInt(document.getElementById("goallevel").value);
+				var c1 = parseInt(document.getElementById("ticket1").value);
+				var c2 = parseInt(document.getElementById("ticket2").value);
+				var c3 = parseInt(document.getElementById("ticket3").value);
+				var c4 = parseInt(document.getElementById("ticket4").value);
+				// var goalpoint = 700 * ( (n + k - 1) * (n - k) / 2) - nowpoint; 
+				var goalpoint = 0;
+				while (k < n) {
+					goalpoint += lvlup_point[k];
+					k++;
+				}
+				goalpoint -= nowpoint;
+				var goalhour = goalpoint / hourpoint;
 				var goalday = parseInt(goalhour / 24).toString();
 				var remainderhour = Math.ceil((goalhour % 24)).toString();
-				c1 = parseInt(document.getElementById("ticket1").value);
-				c2 = parseInt(document.getElementById("ticket2").value);
-				c3 = parseInt(document.getElementById("ticket3").value);
-				c4 = parseInt(document.getElementById("ticket4").value);
 				var tickethour = 2 * c1 + 6 * c2 + 12 * c3 + 24 * c4;
 				var ticketday = parseInt(tickethour / 24).toString();
 				var ticketremainderhour = Math.ceil((tickethour % 24)).toString();
@@ -58,8 +96,8 @@
 					document.getElementById("ticketday").innerHTML  = "";
 				else
 					document.getElementById("ticketday").innerHTML  = "티켓사용시 회득 포인트<br>" + (ticketpoint) + "포인트<br><hr>"+ "티켓으로 단축되는 시간<br>" + (ticketday) + "일 " + (ticketremainderhour) + "시간";
-				if(k>100)
-					alert("101부터는 레벨업시 필요한 경험치 량이 달라져 계산값과 다릅니다\n정보 수집후 업데이트될 예정입니다")
+				// if(k>100)
+				// 	alert("101부터는 레벨업시 필요한 경험치 량이 달라져 계산값과 다릅니다\n정보 수집후 업데이트될 예정입니다");
 			}
 		</script>
 
@@ -79,14 +117,14 @@
 							<hr>
 							<p>목표 가디언 레벨</p>
 							<input id="goallevel" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" onfocus="this.select()">
-							<hr>
+							<!-- <hr> -->
 							
-							<button class="button button5" type="reset">초기화</button>
-							<button class="button button5" type="button" onClick = "compute()">계산</button>
+							<!-- <button class="button5" type="reset" style="display: block; margin: auto;">초기화</button> -->
+							<!-- <button class="button button5" type="button" onClick = "compute()">계산</button> -->
 						</form>
 					</div>
-					<br>
-					<div>
+					<!-- <br> -->
+					<div style="margin-top: 4px;">
 						<p id="Goalday" style="text-indent: 0; margin: 10px;"></p>
 					</div>
 				</td>
@@ -104,14 +142,14 @@
 							<hr>
 							<p>[24시간] 가디언 포인트 티켓</p>
 							<input id="ticket4" type = "number" onkeydown="return digit_check(event)" onkeyup="compute()" value='0' onfocus="this.select()">
-							<hr>
+							<!-- <hr> -->
 							
-							<button class="button button5" type="reset">초기화</button>
-							<button class="button button5" type="button" onClick = "compute()">계산</button>
+							<!-- <button class="button5" type="reset" style="display: block; margin: auto;">초기화</button> -->
+							<!-- <button class="button button5" type="button" onClick = "compute()">계산</button> -->
 						</form>
 					</div>
-					<br>
-					<div>
+					<!-- <br> -->
+					<div style="margin-top: 4px;">
 						<p id="ticketday" style="text-indent: 0; margin: 10px;"></p>
 					</div>
 				</td>
