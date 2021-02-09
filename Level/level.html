@@ -9,18 +9,18 @@
     <body>
         <div style="margin: auto;">
             <p style="margin-top: 5px;">현제레벨</p>
-            <input class="num_input" id="now_lvl" type="number" min="1" max="74" list="DefaultNum">
+            <input class="num_input" id="now_lvl" type="number" min="1" max="74" list="DefaultNum" onchange="">
             <hr>
             <p>목표레벨</p>
-            <input class="num_input" id="goal_lvl" type="number" min="1" max="74" list="DefaultNum">
+            <input class="num_input" id="goal_lvl" type="number" min="1" max="74" list="DefaultNum" onchange="">
             <hr>
             <datalist id="DefaultNum">
                 <option value="1"></option>
                 <option value="69"></option>
                 <option value="74"></option>
             </datalist>
-            <p id="now_exp">현제 경험치</p>
-            <input type="range" value="0" min="0" max="100" list="exp_list" step="10" style="width: 100%;">
+            <p id="now_exp">현제 경험치 0%</p>
+            <input type="range" value="0" min="0" max="100" list="exp_list" style="width: 100%;" onchange="exp_refresh(this);">
             <datalist id="exp_list">
                 <option value="0"></option>
                 <option value="10"></option>
