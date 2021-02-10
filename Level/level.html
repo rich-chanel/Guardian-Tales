@@ -9,10 +9,10 @@
     <body>
         <div style="margin: auto;">
             <p style="margin-top: 5px;">현제레벨</p>
-            <input class="num_input" id="now_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="goal_lvl_min(this);" onchange="exp_cal();">
+            <input class="num_input" id="now_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="max_check(this); goal_lvl_min(this);" onchange="exp_cal();">
             <hr>
             <p>목표레벨</p>
-            <input class="num_input" id="goal_lvl" type="number" min="1" max="74" list="DefaultNum" onchange="exp_cal();">
+            <input class="num_input" id="goal_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="max_check(this)" onchange="exp_cal();">
             <hr>
             <datalist id="DefaultNum">
                 <option value="1"></option>
@@ -20,7 +20,7 @@
                 <option value="74"></option>
             </datalist>
             <p id="now_exp_text">현제 경험치 0%</p>
-            <input type="range" id="now_exp" value="0" min="0" max="100" list="exp_list" style="width: 100%;" oninput="exp_refresh(this);" onchange="exp_refresh(this); exp_cal();">
+            <input type="range" id="now_exp" value="0" min="0" max="100" list="exp_list" style="width: 100%;" oninput="exp_refresh(this); exp_cal();" onchange="exp_refresh(this); exp_cal();">
             <datalist id="exp_list">
                 <option value="0"></option>
                 <option value="10"></option>

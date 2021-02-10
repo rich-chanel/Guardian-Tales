@@ -91,11 +91,11 @@ function exp_cal() {
     var goal_lvl = document.getElementById("goal_lvl").value; //목표 레벨
     var now_exp = document.getElementById("now_exp").value; //현제 경험치
     var goal_exp = Math.round(exp_sum[goal_lvl - 1] - exp_sum[now_lvl - 1] - exp[now_lvl] * (now_exp / 100));
-    if (!isNaN(goal_exp)) {
-        document.getElementById("goal_exp").innerHTML = "필요 경험치량 : " + goal_exp;
-    }
-    else if (goal_exp < 0) {
+    if (goal_exp < 0) {
         document.getElementById("goal_exp").innerHTML = "필요 경험치량 : 0";
+    }
+    else if (!isNaN(goal_exp)) {
+        document.getElementById("goal_exp").innerHTML = "필요 경험치량 : " + goal_exp;
     }
 }
 
@@ -105,4 +105,15 @@ function goal_lvl_min(x) {
     if (goal_lvl.value < x.value) {
         goal_lvl.value = x.value;
     }
+}
+
+function max_check(x) {
+    var max = parseInt(x.getAttribute('max'));
+    if (x.value > max) {
+        x.value = max;
+    }
+}
+
+window.onload = function () {
+    alert("2.10 업데이트로 만렙 확장후 데이터를 수집해야합니다");
 }
