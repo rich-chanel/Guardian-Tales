@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--
+            v1.0
+                레벨업 경험치 계산기 제작
+        -->
+
         <title>레벨업 경험치 계산기</title>
         <link href="image/Exp.png" rel="icon">
         <link href="level.css" rel="stylesheet">
@@ -9,10 +14,10 @@
     <body>
         <div style="margin: auto;">
             <p style="margin-top: 5px;">현제레벨</p>
-            <input class="num_input" id="now_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="max_check(this); goal_lvl_min(this);" onchange="exp_cal();">
+            <input class="num_input" id="now_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="max_check(this); goal_lvl_min(this);" onchange="exp_cal();" onclick="this.select();">
             <hr>
             <p>목표레벨</p>
-            <input class="num_input" id="goal_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="max_check(this)" onchange="exp_cal();">
+            <input class="num_input" id="goal_lvl" type="number" min="1" max="74" list="DefaultNum" oninput="max_check(this)" onchange="exp_cal();" onclick="this.select();">
             <hr>
             <datalist id="DefaultNum">
                 <option value="1"></option>
