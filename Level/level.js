@@ -1,4 +1,4 @@
-var exp = [
+var exp = [ //i 레벨에서 레벨업에 필요한 경험치 량
     0, // 미사용
     100, //exp[1] 1->2
     200,
@@ -75,14 +75,34 @@ var exp = [
     496000, //exp[69] 73->74
 ];
 
-var exp_sum = [0];
+var exp_sum = [0]; //1 레벨부터 i+1 레벨까지 필요한 경험치 량
 for (i = 1; i < exp.length; i++) {
     exp_sum[i] = exp_sum[i-1] + exp[i];
 }
-// console.log("exp", exp); // i 레벨에서 레벨업에 필요한 경험치 량
-// console.log("exp_sum", exp_sum); // 1 레벨부터 i+1 레벨까지 필요한 경험치 량
-
+// console.log("exp", exp); 
+// console.log("exp_sum", exp_sum); 
 
 function exp_refresh(x) {
-    document.getElementById("now_exp").innerHTML = "현제 경험치 " + x.value + "%";
+    document.getElementById("now_exp_text").innerHTML = "현제 경험치 " + x.value + "%";
+}
+
+function exp_cal() {
+    var now_lvl = document.getElementById("now_lvl").value; //현제 레벨
+    var goal_lvl = document.getElementById("goal_lvl").value; //목표 레벨
+    var now_exp = document.getElementById("now_exp").value; //현제 경험치
+    var goal_exp = Math.round(exp_sum[goal_lvl - 1] - exp_sum[now_lvl - 1] - exp[now_lvl] * (now_exp / 100));
+    if (!isNaN(goal_exp)) {
+        document.getElementById("goal_exp").innerHTML = "필요 경험치량 : " + goal_exp;
+    }
+    else if (goal_exp < 0) {
+        document.getElementById("goal_exp").innerHTML = "필요 경험치량 : 0";
+    }
+}
+
+function goal_lvl_min(x) {
+    var goal_lvl = document.getElementById("goal_lvl");
+    goal_lvl.setAttribute('min', x.value);
+    if (goal_lvl.value < x.value) {
+        goal_lvl.value = x.value;
+    }
 }
